@@ -1,0 +1,17 @@
+services:
+  nginx:
+    image: "nginx:latest" # อัปเดต image เป็น latest
+    ports:
+      - "${WWW_PORT}:80"
+    volumes:
+      - ${WWW_PATH}:/usr/share/nginx/html
+      - ./nginx_default.conf:/etc/nginx/conf.d/default.conf
+  
+  fast-api:
+    # ลบ 'build: .' ออก
+    image: ${DOCKER_HUB} # ใช้ Image จาก Docker Hub
+    expose:
+      - 8000
+      
+  redis:
+    image: "redis:alpine"

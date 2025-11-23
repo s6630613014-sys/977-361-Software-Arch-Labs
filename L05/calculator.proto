@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+// Message สำหรับ Request: รับตัวเลข 2 ตัวและ operator
+message CalculateRequest {
+  float num1 = 1;
+  float num2 = 2;
+  string operator = 3;  // +, -, *, /
+}
+
+// Message สำหรับ Response: ส่งผลลัพธ์กลับ
+message CalculateReply {
+  float result = 1;
+  string message = 2;
+}
+
+// Service Calculator
+service Calculator {
+  // RPC สำหรับคำนวณ
+  rpc calculate (CalculateRequest) returns (CalculateReply) {};
+}

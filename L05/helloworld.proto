@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+// Enum สำหรับประเภทผู้ใช้
+enum UserType {
+  UNKNOWN = 0;
+  ADMIN = 1;
+  USER = 2;
+}
+
+// Message สำหรับ Request: รับค่าชื่อ
+message HelloRequest {
+  string name = 1;
+}
+
+// Message สำหรับ Response: ส่งค่าข้อความตอบกลับ
+message HelloReply {
+  string message = 1;
+}
+
+// Message สำหรับ Response แบบละเอียด: ส่งข้อมูลเพิ่มเติม
+message HelloDetailReply {
+  string message = 1;
+  float salary = 2;
+  bool isActive = 3;
+  UserType userType = 4;
+}
+
+// Service ที่กำหนด Method
+service Greeter {
+  // RPC (Remote Procedure Call): SayHello รับ HelloRequest และตอบกลับ HelloReply
+  rpc sayHello (HelloRequest) returns (HelloReply) {};
+  
+  // RPC สำหรับข้อมูลละเอียด
+  rpc helloWithDetail (HelloRequest) returns (HelloDetailReply) {};
+}
